@@ -43,12 +43,11 @@ st.subheader("Enter the text to check the sentiment")
 
 review = st.text_area("Enter the text")
 if st.button("Predict"):
-    review = [review]
-    review = tfidf.transform(review).toarray()
-    prediction = model.predict(review)
+    review = transform_text(review)
+    review = tfidf.transform([review]).toarray()
+    prediction = model.predict(review)[0]
+
     if prediction == 0:
         st.write("Not Spam")
     else:
         st.write("Spam")
-
-
